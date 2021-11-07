@@ -7,6 +7,9 @@ package com.rentamaquina.maquinaria.app.repositories.crud;
 
 import com.rentamaquina.maquinaria.app.entities.Client;
 import com.rentamaquina.maquinaria.app.entities.Reservation;
+import java.util.Date;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -19,4 +22,12 @@ public interface ReservationCrudRepository extends CrudRepository<Reservation,In
 
     public void delete(Reservation reservation);
     
+    public List<Reservation> findAllByStatus (String status);
+    
+    public List<Reservation> findAllByStartDateAfterAndStartDateBefore(Date dateOne, Date dateTwo);
+
+    //select clientid, count(*) as "total" from reservacion group by clientid order by total desc; 
+    @Query("SELECT c.client, COUNT(c.client) FROM Reservation AS c group by c.client order by COUNT(c.client)DESC")
+    public List<Object[]> countTotalReservationByClient();
+
 }

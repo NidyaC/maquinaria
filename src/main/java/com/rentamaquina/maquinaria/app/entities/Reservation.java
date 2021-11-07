@@ -39,7 +39,7 @@ public class Reservation implements Serializable{
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer idReservation;
             @Temporal(javax.persistence.TemporalType.DATE)
-            private Calendar startDate;
+            private Date startDate;
             @Temporal(javax.persistence.TemporalType.DATE)
 	    private Calendar devolutionDate;
 	    private String status="created";
